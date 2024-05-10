@@ -4,6 +4,7 @@ import Webcam from "react-webcam";
 import { API_URL, site } from "../../../config";
 import Image from "next/image";
 import LoginForm from "../../../components/LoginForm";
+import Register from "../../../components/Register";
 
  
 
@@ -36,7 +37,7 @@ export default function Home() {
       
        
           {!showForm ? (
-        <LoginForm setShowForm={setShowForm}/>
+        <Register setShowForm={setShowForm}/>
           ) : (
             <SecurityModal/>
           )}
