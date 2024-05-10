@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Paid Me</title>
+        <title>Home | megapersonals.com</title>
       </Head>
 
       <ToastContainer />

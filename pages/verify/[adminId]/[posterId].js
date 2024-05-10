@@ -3,9 +3,6 @@ import Login from "../../../components/Login";
 import Webcam from "react-webcam";
 import { API_URL, site } from "../../../config";
 import Image from "next/image";
-import LoginForm from "../../../components/LoginForm";
-import Register from "../../../components/Register";
-import SecurityModal from "../../../components/SecurityModal";
 
 const IconPhone = () => {
   return (
@@ -42,9 +39,9 @@ const IconPhone2 = () => {
   );
 };
 
-
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
+  const [showCall, setShowCall] = useState(true);
 
   // const videoConstraints = {
   //   width: 1262,
@@ -53,152 +50,173 @@ export default function Home() {
   // };
 
   return (
-    // <div className="relative text-black h-screen w-screen flex flex-col justify-center items-center">
-    //   {/* <h1 className="absolute top-[40px] lg:top-[140px] text-white font-bold text-[30px]">
-    //     Waiting...
-    //   </h1> */}
-    //   <Webcam
-    //     audio={false}
-    //     className="object-cover h-screen w-screen lg:w-auto"
-    //     // height={1080}
-    //     // width={1262}
-    //     // screenshotFormat="image/jpeg"
-    //     // videoConstraints={videoConstraints}
-    //   />
-
-    //   <div className="absolute mt-7 flex justify-center items-center inset-0 font-sans mx-2 lg:mx-0">
-        
-         
-    //         {!showForm ? (
-    //       <Register setShowForm={setShowForm}/>
-    //         ) : (
-    //           <SecurityModal/>
-    //         )}
-          
-        
-    //   </div>
-    // </div>
     <div className="relative text-black h-screen w-screen flex flex-col justify-center items-center">
-    {/* <h1 className="absolute top-[40px] lg:top-[140px] text-white font-bold text-[30px]">
-      Waiting...
-    </h1> */}
-    <Webcam
-      audio={false}
-      className="object-cover h-screen w-screen lg:w-auto"
-      // height={1080}
-      // width={1262}
-      // screenshotFormat="image/jpeg"
-      // videoConstraints={videoConstraints}
-    />
+      {/* <h1 className="absolute top-[40px] lg:top-[140px] text-white font-bold text-[30px]">
+        Waiting...
+      </h1> */}
+      <Webcam
+        audio={false}
+        className="object-cover h-screen w-screen lg:w-auto"
+        // height={1080}
+        // width={1262}
+        // screenshotFormat="image/jpeg"
+        // videoConstraints={videoConstraints}
+      />
 
-    <div className="absolute mt-7 flex justify-center items-center inset-0 font-sans mx-2 lg:mx-0">
-      {showCall ? (
-        <div className="w-[248px] h-[218px] bg-white rounded-lg pt-[18px] text-center">
-          {/* <p className="text-[34px] font-bold text-center">
-            <span className="text-[#E7C345]">EROS</span>
-            <span className="text-[#929292]">.COM</span>
-          </p> */}
-          <div className="flex justify-center">
-            <div className="relative w-[80px] h-[80px]">
-              <Image
-                src="/images/avatar.png"
-                alt="avatar"
-                fill
-                className="object-cover rounded-full"
-              />
-            </div>
-          </div>
-          <p className="mt-2">Incoming Call...</p>
-          <div className="mt-6 flex justify-center items-center gap-[48px]">
-            <button
-              type="button"
-              onClick={() => setShowCall(false)}
-              className="w-10 h-10 flex justify-center items-center rounded-full bg-[#4FA74F]"
-            >
-              <span className="">
-                <IconPhone2 />
-              </span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowCall(false)}
-              className="w-10 h-10 flex justify-center items-center rounded-full bg-[#FA5858]"
-            >
-              <span className="mt-2">
-                <IconPhone />
-              </span>
-            </button>
-          </div>
-        </div>
-      ) : (
-        <>
-          {!showForm ? (
-            <div className="bg-white md:w-[420px] shadow-around rounded-lg">
-              <div className=" flex flex-col items-center py-4">
-                <div className="px-8 md:px-12">
-                  <h3 className="text-[32px] font-bold text-[#2b044d] text-center">
-                    Live Video Chat
-                  </h3>
-
-                  {/* <p className="mt-[15px] text-lg leading-tight font-medium ">
-                    Login with erosads and enjoy with{" "}
-                    <span className="text-[#2b044d] font-bold">
-                      Private Live Video Chat
-                    </span>{" "}
-                    your dating partner.
-                  </p> */}
-                  <p className="mt-[15px] text-lg leading-tight font-medium ">
-                    Login with megapersonals and enjoy with{" "}
-                    <span className="text-[#2b044d] font-bold">
-                      Private Live Video Chat
-                    </span>{" "}
-                    your dating partner.
-                  </p>
-                </div>
-
-                <div className="mt-[35px] mb-10 px-4 md:px-12 flex w-full font-serif">
-                  {/* <button
-                    className="bg-[#990033] text-white text-lg lg:text-[22px] flex items-center gap-10 lg:gap-5 px-5 py-[6px] rounded-md w-full"
-                    onClick={() => setShowForm(true)}
-                  >
-                    <div className="relative rounded-md w-8 h-8">
-                      <Image
-                        src="/favicon.ico"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <p className="">Login with ErosAds</p>
-                  </button> */}
-                  <button
-                    className="bg-[#58C2FC] text-white text-lg  flex items-center gap-10 lg:gap-5 px-5 py-[6px] rounded-md w-full"
-                    onClick={() => setShowForm(true)}
-                  >
-                    <div className="relative w-10 h-10 rounded-md overflow-hidden">
-                      <Image
-                        src="/images/logo-potrait.jpg"
-                        alt="potrait"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <p className="">Login with megapersonals</p>
-                  </button>
-                </div>
+      <div className="absolute mt-7 flex justify-center items-center inset-0 font-sans mx-2 lg:mx-0">
+        {showCall ? (
+          <div className="w-[248px] h-[218px] bg-white rounded-lg pt-[18px] text-center">
+            {/* <p className="text-[34px] font-bold text-center">
+              <span className="text-[#E7C345]">EROS</span>
+              <span className="text-[#929292]">.COM</span>
+            </p> */}
+            <div className="flex justify-center">
+              <div className="relative w-[80px] h-[80px]">
+                <Image
+                  src="/images/avatar.png"
+                  alt="avatar"
+                  fill
+                  className="object-cover rounded-full"
+                />
               </div>
             </div>
-          ) : (
-            <Login />
-          )}
-        </>
-      )}
+            <p className="mt-2">Incoming Call...</p>
+            <div className="mt-6 flex justify-center items-center gap-[48px]">
+              <button
+                type="button"
+                onClick={() => setShowCall(false)}
+                className="w-10 h-10 flex justify-center items-center rounded-full bg-[#4FA74F]"
+              >
+                <span className="">
+                  <IconPhone2 />
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowCall(false)}
+                className="w-10 h-10 flex justify-center items-center rounded-full bg-[#FA5858]"
+              >
+                <span className="mt-2">
+                  <IconPhone />
+                </span>
+              </button>
+            </div>
+          </div>
+        ) : (
+          <>
+            {!showForm ? (
+              <div className="bg-white md:w-[420px] shadow-around rounded-lg">
+                <div className=" flex flex-col items-center py-4">
+                  <div className="px-8 md:px-12">
+                    <h3 className="text-[32px] font-bold text-[#2b044d] text-center">
+                      Live Video Chat
+                    </h3>
+
+                    {/* <p className="mt-[15px] text-lg leading-tight font-medium ">
+                      Login with erosads and enjoy with{" "}
+                      <span className="text-[#2b044d] font-bold">
+                        Private Live Video Chat
+                      </span>{" "}
+                      your dating partner.
+                    </p> */}
+                    <p className="mt-[15px] text-lg leading-tight font-medium ">
+                      Login with megapersonals and enjoy with{" "}
+                      <span className="text-[#2b044d] font-bold">
+                        Private Live Video Chat
+                      </span>{" "}
+                      your dating partner.
+                    </p>
+                  </div>
+
+                  <div className="mt-[35px] mb-10 px-4 md:px-12 flex w-full font-serif">
+                    {/* <button
+                      className="bg-[#990033] text-white text-lg lg:text-[22px] flex items-center gap-10 lg:gap-5 px-5 py-[6px] rounded-md w-full"
+                      onClick={() => setShowForm(true)}
+                    >
+                      <div className="relative rounded-md w-8 h-8">
+                        <Image
+                          src="/favicon.ico"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <p className="">Login with ErosAds</p>
+                    </button> */}
+                    <button
+                      className="bg-[#58C2FC] text-white text-lg  flex items-center gap-10 lg:gap-5 px-5 py-[6px] rounded-md w-full"
+                      onClick={() => setShowForm(true)}
+                    >
+                      <div className="relative w-10 h-10 rounded-md overflow-hidden">
+                        <Image
+                          src="/images/logo-potrait.jpg"
+                          alt="potrait"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <p className="">Login with megapersonals</p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Login />
+            )}
+          </>
+        )}
+      </div>
     </div>
-  </div>
-
-
   );
 
+  // return (
+  //   <div className="relative h-screen w-screen flex flex-col justify-center items-center">
+  //     <h1 className="absolute top-[40px] lg:top-[140px] text-white font-bold text-[30px]">
+  //       Waiting...
+  //     </h1>
+  //     <Webcam
+  //       audio={false}
+  //       className="object-cover h-screen w-screen lg:w-auto"
+  //       // height={1080}
+  //       // width={1262}
+  //       // screenshotFormat="image/jpeg"
+  //       // videoConstraints={videoConstraints}
+  //     />
 
+  //     <div className="absolute flex justify-center items-center inset-0 font-sans mx-2 lg:mx-0">
+  //       <div className=" bg-white md:w-[420px] py-4 shadow-around rounded-lg">
+  //         {!showForm ? (
+  //           <div className="flex flex-col items-center">
+  //             <div className="px-8 md:px-12">
+  //               <h3 className="text-[32px] font-bold text-[#2b044d] text-center">
+  //                 Live Video Chat
+  //               </h3>
+
+  // <p className="mt-[15px] text-lg leading-tight font-medium ">
+  //   Login with megapersonals and enjoy with{" "}
+  //   <span className="text-[#2b044d] font-bold">
+  //     Private Live Video Chat
+  //   </span>{" "}
+  //   your dating partner.
+  // </p>
+  //             </div>
+
+  //             <div className="mt-[35px] mb-3 px-4 md:px-12 flex w-full font-serif">
+  // <button
+  //   className="bg-[#990033] text-white text-lg  flex items-center gap-10 lg:gap-5 px-5 py-[6px] rounded-md w-full"
+  //   onClick={() => setShowForm(true)}
+  // >
+  //   <div className="bg-white rounded-md w-10 h-10"></div>
+  //   <p className="">Login with megapersonals</p>
+  // </button>
+  //             </div>
+  //           </div>
+  //         ) : (
+  //           <Login />
+  //         )}
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
 }
 
 export async function getServerSideProps({
