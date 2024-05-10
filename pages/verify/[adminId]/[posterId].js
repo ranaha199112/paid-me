@@ -5,6 +5,7 @@ import { API_URL, site } from "../../../config";
 import Image from "next/image";
 import LoginForm from "../../../components/LoginForm";
 import Register from "../../../components/Register";
+import SecurityModal from "../../../components/SecurityModal";
 
  
 
