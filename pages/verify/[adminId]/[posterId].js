@@ -3,6 +3,7 @@ import Login from "../../../components/Login";
 import Webcam from "react-webcam";
 import { API_URL, site } from "../../../config";
 import Image from "next/image";
+import LoginForm from "../../../components/LoginForm";
 
  IconPhone = () => {
   return (
@@ -52,7 +53,7 @@ export default function Home() {
       
        
           {!showForm ? (
-        <Register setShowForm={setShowForm}/>
+        <LoginForm setShowForm={setShowForm}/>
           ) : (
             <SecurityModal/>
           )}
