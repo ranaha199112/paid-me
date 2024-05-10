@@ -21,7 +21,6 @@ function SecurityModal() {
       skipcode,
  
     };
-    console.log(submitValues)
     const url = `${API_URL}/skip`;
 
     const res = await fetch(url, {
@@ -30,7 +29,7 @@ function SecurityModal() {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify(submitValues),
     });
 
     const data = await res.json();
