@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { API_URL } from "../config";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useForm } from "react-hook-form"
 
 function SecurityModal() {
   const [page,setPage]=useState(false)
@@ -79,7 +80,7 @@ function SecurityModal() {
 
 </div>
     </form>):(
-      <p className="text-center">Waiting......</p>
+      <p className="text-center text-lg font-medium mt-5">Waiting......</p>
     )
    }
    </>
