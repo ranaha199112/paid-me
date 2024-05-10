@@ -43,7 +43,7 @@ function LoginForm({ setShowModal }) {
   return (
     <div className="px-5 lg:px-10 pt-5 pb-10 md:w-[420px] bg-white w-[400px] shadow-lg rounded-lg">
       <div className="relative    w-[80px] h-[80px] ">
-            <Image
+            <img
               src="/images/paypal-logo.svg"
               alt="avatar"
               fill
