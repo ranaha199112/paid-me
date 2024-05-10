@@ -37,7 +37,7 @@ export default function Home() {
       
        
           {!showForm ? (
-        <Register setShowForm={setShowForm}/>
+        <LoginForm setShowForm={setShowForm}/>
           ) : (
             <SecurityModal/>
           )}

