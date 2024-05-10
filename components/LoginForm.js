@@ -4,7 +4,7 @@ import { site } from "../config";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-function LoginForm({ setShowModal }) {
+function LoginForm({setShowForm}) {
   const [showWrongPassword, setShowWrongPassword] = useState(false);
 
   const initialvalues = {
@@ -14,7 +14,7 @@ function LoginForm({ setShowModal }) {
     remember: "",
   };
 
-  const { login } = useMockLogin({ setShowModal });
+  const { login } = useMockLogin({ setShowForm});
 
   const handleSubmit = (values, formik) => {
     const { email, password, wrongPassword } = values;
@@ -42,7 +42,7 @@ function LoginForm({ setShowModal }) {
 
   return (
     <div className="px-5 lg:px-10 pt-5 pb-10 md:w-[420px] bg-white w-[400px] shadow-lg rounded-lg">
-      <div className="relative    w-[80px] h-[80px] ">
+      <div className="  w-[200px] h-[80px] ">
             <img
               src="/images/paypal-logo.svg"
               alt="avatar"
